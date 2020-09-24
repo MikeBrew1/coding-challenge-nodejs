@@ -42,8 +42,7 @@ function GlobalFilter({
 }) {
   const count = preGlobalFilteredRows.length
   const [value, setValue] = React.useState(globalFilter)
-  const onChange = setGlobalFilter(value || undefined)
-
+  // const onChange = setGlobalFilter(value || undefined)
   return (
     <span>
       Search:{' '}
@@ -51,7 +50,8 @@ function GlobalFilter({
         value={value || ""}
         onChange={e => {
           setValue(e.target.value);
-          onChange(e.target.value);
+          setGlobalFilter(value || undefined)
+          // onChange(e.target.value);
         }}
         placeholder={`${count} records...`}
         style={{
@@ -372,7 +372,8 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
-        let res = await axios.get("https://www.metaweather.com/api/location/2487956");
+        // let res = await axios.get("https://www.metaweather.com/api/location/2487956");
+        let res = await axios.get("http://localhost:5000/api/weather");
         setData(res.data.consolidated_weather);
         setPlace(res.data.title);
       } catch (e) {
